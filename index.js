@@ -67,9 +67,7 @@ app.get('/', (req, res) => {
 app.use('/api/web/auth', authRoute)
 app.use('/api/web/user', userRoute)
 app.use('/api/web/transaction', transactionRoute)
-app.use('/api/web/airtimeToCash', airtimeToCashRoute
-  
-)
+app.use('/api/web/airtimeToCash', airtimeToCashRoute)
 
 
 

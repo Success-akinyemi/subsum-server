@@ -78,8 +78,9 @@ export async function updateUser(req, res){
 //GET ALL PEOPLE A USER REFERRED
 export async function getAllUserReferrees(req, res){
     const { id } = req.params
+    const { _id } = req.user
     try {
-        const user = await UserModel.findById({ _id : id })
+        const user = await UserModel.findById({ _id : _id })
 
         const referrees = user.referrals
         console.log('first', referrees)

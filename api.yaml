@@ -1,7 +1,7 @@
 swagger: '2.0'
 info: 
   title: Subsum api documentation
-  description: Api documentation for subsum 
+  description: Api documentation for subsum each request comes with a cookie sent from the client
   version: 1.0
   contact: 
     email: successakinyemi365@gmail.com
@@ -24,7 +24,7 @@ paths:
   /api/web/auth/login:
     post:
       summary: Login user
-      description: login a user
+      description: login a user Required Fields- *emailOrMobile, *password
       responses:
         401:
           description: All inputs feilds are required email and password
@@ -35,7 +35,7 @@ paths:
         200: 
           description: signup successfull but account not verified
         201:
-          description: signup successfull
+          description: signup successfull and cookie set to server url
           schema:
             type: object
             properties:
@@ -70,7 +70,7 @@ paths:
   /api/web/auth/forgotPassword:       
     post:
       summary: Forgot password
-      description: forgot password for a user with user email
+      description: forgot password for a user with user email required feilds *email
       responses:
         404:
           description: Email address does not exist
@@ -81,7 +81,7 @@ paths:
   /api/web/auth/resetPassword/:resetToken:       
     post:
       summary: Reset password
-      description: Reset Password endpoint for user
+      description: Reset Password endpoint for user Required body *password, *confirmPassword
       responses:
         400:
           description: User error
@@ -95,7 +95,7 @@ paths:
           description: Password Reset success
   /api/web/user/updateUser:       
     post:
-      summary: Update user 
+      summary: Update user body data- username, firstName, lastName, email, mobile
       description: Update user info endpoint
       responses:
         404:
@@ -105,7 +105,7 @@ paths:
         200:
           description: Update successful
   /api/web/user/getAllUserReferrees:       
-    post:
+    get:
       summary: User referrals
       description: Get all people referred by user 
       responses:
@@ -117,3 +117,35 @@ paths:
             type: array
             items:
               type: object
+  /api/web/transaction/fetchAllUserTractions:       
+    get:
+      summary: Fetch all transaction of a user
+      description: Get all transaction done by user
+      responses:
+        500:
+          description: Internal server error
+        200:
+          description: successful transaction data sent
+  /api/web/transaction/fetchAUserTraction/:id:       
+    get:
+      summary: Fetch a transaction of a user
+      description: Get a transaction done by user
+      responses:
+        500:
+          description: Internal server error
+        403: 
+          description: Invalid user
+        200:
+          description: successful transaction data sent to the client
+  /api/web/airtimeToCash/convertAirtimeToCash:       
+    post:
+      summary: Endpoint of user to convert airtime to cash
+      description: required body- networkCode, phoneNumber, amount, airtimeSharePin
+      responses:
+        500:
+          description: Internal server error
+        403: 
+          description: Invalid user
+        200:
+          description: successful transaction data sent to the client
+
