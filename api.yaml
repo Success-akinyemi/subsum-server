@@ -1,0 +1,119 @@
+swagger: '2.0'
+info: 
+  title: Subsum api documentation
+  description: Api documentation for subsum 
+  version: 1.0
+  contact: 
+    email: successakinyemi365@gmail.com
+  license:
+    name: Apache 2.0
+    -url: 'http://apache.org/'
+  servers:
+    -url: http://localhost:9000
+    description: subsum website link
+schemes: [http, https]
+
+paths:
+  /:
+    get:
+      summary: Home get request
+      description: the first request to check server
+      responses:
+        200:
+          description: Success
+  /api/web/auth/login:
+    post:
+      summary: Login user
+      description: login a user
+      responses:
+        401:
+          description: All inputs feilds are required email and password
+        403: 
+          description: Wrong password or email address
+        500: 
+          description: Server Error
+        200: 
+          description: signup successfull but account not verified
+        201:
+          description: signup successfull
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+              username: 
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              mobile:
+                type: string
+              profile:
+                type: string
+              acctBalance:
+                type: number
+              transactionTotal:
+                type: number
+              refCode:
+                type: string
+              referralLink:
+                type: string
+              referrals:
+                type: array
+              referredBy:
+                type: string
+              verified:
+                type: boolean
+              blocked:
+                type: boolean
+  /api/web/auth/forgotPassword:       
+    post:
+      summary: Forgot password
+      description: forgot password for a user with user email
+      responses:
+        404:
+          description: Email address does not exist
+        500:
+          description: Internal server error
+        200:
+          description: Reset email sent
+  /api/web/auth/resetPassword/:resetToken:       
+    post:
+      summary: Reset password
+      description: Reset Password endpoint for user
+      responses:
+        400:
+          description: User error
+          schema:
+            type: string
+            example:
+              1. Passwords must be at least 6 characters 2. password do not match 3. Passwords must contain at least one special character 4. Invalid Reset Token    
+        500:
+          description: Internal server error
+        201:
+          description: Password Reset success
+  /api/web/user/updateUser:       
+    post:
+      summary: Update user 
+      description: Update user info endpoint
+      responses:
+        404:
+          description: No user with this id found
+        500:
+          description: Internal server error
+        200:
+          description: Update successful
+  /api/web/user/getAllUserReferrees:       
+    post:
+      summary: User referrals
+      description: Get all people referred by user 
+      responses:
+        500:
+          description: Internal server error
+        200:
+          description: successful
+          schema:
+            type: array
+            items:
+              type: object
