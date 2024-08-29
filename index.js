@@ -55,7 +55,7 @@ app.use(cors(corsOptions));
 const PORT = process.env.PORT || 9000
 
 //Import DB
-//import './connection/db.js'
+import './connection/db.js'
 
 /**HTTP get request */
 app.get('/', (req, res) => {
