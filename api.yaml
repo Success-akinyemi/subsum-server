@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     -url: 'http://apache.org/'
   servers:
-    -url: http://localhost:9000
+    -url: https://subsum-server.onrender.com
     description: subsum website link
 schemes: [http, https]
 
